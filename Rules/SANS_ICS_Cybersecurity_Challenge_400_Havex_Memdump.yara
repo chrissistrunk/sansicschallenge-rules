@@ -1,5 +1,5 @@
 
-rule Havex_ICS_Challenge_Memdump
+rule SANS_ICS_Cybersecurity_Challenge_400_Havex_Memdump
 	{
 	meta:
 		description = "Detects Havex Windows process executable from memory dump"
@@ -9,7 +9,7 @@ rule Havex_ICS_Challenge_Memdump
 	strings:
 		$magic = { 4d 5a }	
 	
-	    $s1 = "~tracedscn.yls" fullword wide
+	        $s1 = "~tracedscn.yls" fullword wide
 		$s2 = "[!]Start" fullword wide
 		$s3 = "[+]Get WSADATA" fullword wide
 		$s4 = "[-]Can not get local ip" fullword wide
