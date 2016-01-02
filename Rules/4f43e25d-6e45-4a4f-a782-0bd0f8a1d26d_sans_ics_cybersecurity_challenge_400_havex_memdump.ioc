@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4f43e25d-6e45-4a4f-a782-0bd0f8a1d26d" last-modified="2016-01-02T00:06:44" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>Havex ICS-SCADA Malware (SANS ICS Challenge 400)</short_description>
+  <description>The Dragonfly group, which is also known by other vendors as Energetic Bear, are a capable group who are evolving over time and targeting primarily the energy sector and related industries. They have been in operation since at least 2011 but may have been active even longer than that. Dragonfly initially targeted defense and aviation companies in the US and Canada before shifting its focus to US and European energy firms in early 2013. More recent targets have included companies related to industrial control systems. - via @iocbucket on another Havex openIOC.
+
+This is a real sample of Havex dumped from a process executable from a Windows 7 memory dump. This is part of the 2015 SANS ICS Cybersecurity Challenge 400.</description>
+  <authored_by>@chrissistrunk</authored_by>
+  <authored_date>2015-12-01T08:00:40</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="d239673d-fc1d-4dab-91fb-bb9b8b19775d">
+      <IndicatorItem id="1aa1bfc3-e1d0-44b7-ae03-d20709f44252" condition="contains">
+        <Context document="FileItem" search="FileItem/FileName" type="mir" />
+        <Content type="string">bddd4e2b84fa2ad61eb065e7797270ff.exe</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="6dba1718-e007-4e22-a9bd-701135001496">
+        <IndicatorItem id="cde0255c-1c04-49fe-9ab6-e22179607aa4" condition="is">
+          <Context document="FileItem" search="FileItem/PEInfo/PETimeStamp" type="mir" />
+          <Content type="date">2013-11-06 11:27:38</Content>
+        </IndicatorItem>
+        <IndicatorItem id="73f28485-ace8-4d77-86e4-03a44ecfa330" condition="contains">
+          <Context document="FileItem" search="FileItem/PEInfo/ImportedModules/Module/Name" type="mir" />
+          <Content type="string">KERNEL32.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="487a2398-eab1-446f-9496-455d88499a5a" condition="contains">
+          <Context document="FileItem" search="FileItem/PEInfo/ImportedModules/Module/Name" type="mir" />
+          <Content type="string">WS2_32.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="7385ff03-101d-4e1f-95ef-96f6c3b52fb7" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\AeDebug</Content>
+        </IndicatorItem>
+        <IndicatorItem id="fd2b7173-20ea-477c-8236-4531ecf4b683" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">HKEY_LOCAL_MACHINE\Software\Microsoft\PCHealth\ErrorReporting\DW</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b9521784-b52e-43ad-9ea6-9874048aeac1" condition="is">
+          <Context document="FileItem" search="FileItem/SizeInBytes" type="mir" />
+          <Content type="int">48640 bytes</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5e20cb63-c12e-469b-a8da-d2e956281388" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">8065674de8d79d1c0e7b3baf81246e7d</Content>
+        </IndicatorItem>
+        <IndicatorItem id="91e62dd5-402a-4dce-860f-fd6581fc9fb8" condition="contains">
+          <Context document="FileItem" search="FileItem/StringList/string" type="mir" />
+          <Content type="string">~tracedscn.yls</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e9d0c146-b2a3-49b2-90a1-cfdb9514e717" condition="contains">
+          <Context document="FileItem" search="FileItem/StringList/string" type="mir" />
+          <Content type="string">[!]Start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="12e9f027-1eee-4a33-b27c-0e2363e55695" condition="contains">
+          <Context document="FileItem" search="FileItem/StringList/string" type="mir" />
+          <Content type="string">[+]Get WSADATA</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c8ede25c-83bb-4e11-b86e-5699fb5d4131" condition="is">
+          <Context document="PortItem" search="PortItem/remotePort" type="mir" />
+          <Content type="int">12401</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f1f941f5-77b1-449e-982f-bb78b44a1021" condition="is">
+          <Context document="PortItem" search="PortItem/remotePort" type="mir" />
+          <Content type="int">44818</Content>
+        </IndicatorItem>
+        <Indicator operator="AND" id="98fb87cf-f642-4a4c-9175-4e836649e7b7">
+          <IndicatorItem id="07c51761-5b9c-4f4b-9b06-7733da0e4737" condition="contains">
+            <Context document="PortItem" search="PortItem/state" type="mir" />
+            <Content type="string">SYN_SENT</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

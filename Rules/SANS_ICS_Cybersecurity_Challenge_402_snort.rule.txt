@@ -1,0 +1,4 @@
+# This Snort rule is for the SANS ICS Cybersecurity Challenge 402
+#by Chris Sistrunk
+#
+alert tcp any any -> any any (msg:"FILE-SCRIPT Microsoft Windows .bat file xfer from SMB share attempt"; content:"|FF|SMB|A2 00 00 00 00|"; content:"|2E 00|b|00|a|00|t|00|"; nocase; sid:1000402; rev:1;)
